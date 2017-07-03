@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>lightcontrol</title>
+        <script
+              src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                  crossorigin="anonymous"></script>
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                line-height: 1.5;
+                font-size: 16px;
+                color: #333;
+            }
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 20px;
+            }
+            button {
+                padding: 20px;
+                width: 70px;
+                height: 50px;
+            }
+            button.on{
+                border: 1px #333 solid;
+                background-color: white;
+                color: #333;
+            }
+            button.off{
+                border: 1px #333 solid;
+                background-color: #333;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Light control</h1>
+        <table>
+        {% for room in config.keys()|sort %}
+            <tr>
+                <td>
+                    {{room}}
+                </td>
+                <td>
+                    <button class="on" onclick="javascript:light('{{room}}', 'on')">ON</button>
+                    <button class="off" onclick="javascript:light('{{room}}', 'off')">OFF</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <script type="text/javascript">
+            function light(room, onoff) {
+                $.post("/lights/" + encodeURIComponent(room) + "/" + onoff);
+            }
+        </script>
+    </body>
+</html>
