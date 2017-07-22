@@ -1,0 +1,64 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    
+    "description": "85 Bloor St E, Unit 503",
+
+    "accessories": [
+        {
+            "accessory": "Http",
+            "name": "Big Livingroom Light",
+		"switchHandling": "realtime",
+        "http_method": "POST",
+        "on_url": "http://localhost:6001/lights/livingroom-bright/on",
+        "off_url": "http://localhost:6001/lights/livingroom-bright/off",
+        "status_url": "http://localhost:6001/lights/livingroom-bright/status",
+        "service": "Light",
+        "brightnessHandling": "no",
+        "brightness_url": "",
+        "brightnesslvl_url": "",
+        "sendimmediately": "",
+        "username" : "",
+        "password" : ""         
+        },
+        {
+            "accessory": "Http",
+            "name": "Small Livingroom Light",
+		"switchHandling": "realtime",
+        "http_method": "POST",
+        "on_url": "http://localhost:6001/lights/livingroom-small/on",
+        "off_url": "http://localhost:6001/lights/livingroom-small/off",
+        "status_url": "http://localhost:6001/lights/livingroom-small/status",
+        "service": "Light",
+        "brightnessHandling": "no",
+        "brightness_url": "",
+        "brightnesslvl_url": "",
+        "sendimmediately": "",
+        "username" : "",
+        "password" : ""         
+        },
+        {
+            "accessory": "Http",
+            "name": "Bedroom Light",
+		"switchHandling": "realtime",
+        "http_method": "POST",
+        "on_url": "http://localhost:6001/lights/bedroom/on",
+        "off_url": "http://localhost:6001/lights/bedroom/off",
+        "status_url": "http://localhost:6001/lights/bedroom/status",
+        "service": "Light",
+        "brightnessHandling": "no",
+        "brightness_url": "",
+        "brightnesslvl_url": "",
+        "sendimmediately": "",
+        "username" : "",
+        "password" : ""         
+        }
+    ],
+
+
+    "platforms": [] 
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=Homebridge
+After=syslog.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/src/light-control
+ExecStart=/bin/bash -c "/usr/bin/homebridge"
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
