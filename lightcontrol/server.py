@@ -25,8 +25,12 @@ class Preferences:
         self.filename = filename
     def read(self):
         if os.path.exists(self.filename):
-            with open(self.filename, 'rb') as f:
-                return json.loads(f.read().decode('utf-8'))
+            try:
+                with open(self.filename, 'rb') as f:
+                    return json.loads(f.read().decode('utf-8'))
+            except:
+                logger.exception("Error reading JSON. Resetting preferences")
+                return dict()
         else:
             return dict()
     def write(self, d):
