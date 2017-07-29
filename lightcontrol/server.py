@@ -69,8 +69,8 @@ def status(room_name):
     return "1" if stat else "0"
 
 
-for name, val in pref.read().items():
-    toggle_switch(name, val)
+#for name, val in pref.read().items():
+#    toggle_switch(name, val)
 
 #import IPython
 #IPython.embed()
