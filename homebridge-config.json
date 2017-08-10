@@ -10,9 +10,16 @@
 
     "accessories": [
         {
+            "accessory": "Thermostat",
+            "name": "Thermostat",
+            "apiroute": "http://wbk-pidev:5000",
+            "maxTemp":30,
+            "minTemp":18
+        },
+        {
             "accessory": "Http",
             "name": "Big Livingroom Light",
-		"switchHandling": "realtime",
+		"switchHandling": "yes",
         "http_method": "POST",
         "on_url": "http://localhost:6001/lights/livingroom-bright/on",
         "off_url": "http://localhost:6001/lights/livingroom-bright/off",
@@ -28,7 +35,7 @@
         {
             "accessory": "Http",
             "name": "Small Livingroom Light",
-		"switchHandling": "realtime",
+		"switchHandling": "yes",
         "http_method": "POST",
         "on_url": "http://localhost:6001/lights/livingroom-small/on",
         "off_url": "http://localhost:6001/lights/livingroom-small/off",
@@ -44,7 +51,7 @@
         {
             "accessory": "Http",
             "name": "Bedroom Light",
-		"switchHandling": "realtime",
+		"switchHandling": "yes",
         "http_method": "POST",
         "on_url": "http://localhost:6001/lights/bedroom/on",
         "off_url": "http://localhost:6001/lights/bedroom/off",
