@@ -67,5 +67,11 @@
     ],
 
 
-    "platforms": [] 
+    "platforms": [
+        {
+            "platform": "TplinkSmarthome",
+            "name": "TplinkSmarthome",
+            "switchModels": ["HS200"]
+        }
+    ] 
 }
