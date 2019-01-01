@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import threading
 import logging
-from threading import RLock, Lock
+from threading import RLock, Lock, Thread
 from tzlocal import get_localzone
 from flask import Flask, render_template, url_for, request, make_response
 from lightcontrol.config import lights
@@ -76,6 +76,44 @@ def status(room_name):
     #toggle_switch(room_name, stat)
     return "1" if stat else "0"
 
+def poll_sqs():
+    import boto3
+    sqs = boto3.client('sqs')
+    queue_url = 'https://sqs.us-east-1.amazonaws.com/865135545601/alexa-light.fifo'
+    logger.info("sqs polling thread start") 
+    while True:
+        logger.info("sqs polling!") 
+        response = sqs.receive_message(
+                QueueUrl=queue_url,
+                AttributeNames=[
+                            'SentTimestamp'
+                        ],
+                MaxNumberOfMessages=1,
+                MessageAttributeNames=[
+                            'All'
+                        ],
+                VisibilityTimeout=1,
+                WaitTimeSeconds=20
+        )
+        if response.get('Messages'):
+            logger.info("Got responses: %d" % len(response['Messages'])) 
+            for message in response['Messages']:
+                r = json.loads(message['Body'])['request']['directive']
+                onoff = r['header']['name'] == 'TurnOn'
+                light_name = r['endpoint']['endpointId']
+                logger.info("From SQS, toggle: %s, %s" % (light_name, onoff))
+                toggle_switch(light_name, onoff)
+                receipt_handle = message['ReceiptHandle']
+                logger.info("Deleting message %r" % receipt_handle)
+                sqs.delete_message(
+                    QueueUrl=queue_url,
+                    ReceiptHandle=receipt_handle
+                )
+        else:
+            logger.info("No messages")
+
+sqs_thread = Thread(target=poll_sqs)
+sqs_thread.start()
 
 #for name, val in pref.read().items():
 #    toggle_switch(name, val)

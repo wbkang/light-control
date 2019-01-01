@@ -13,6 +13,7 @@ setup(
     packages=find_packages(exclude=['tests*']),
     setup_requires=['pytest-runner'],
     install_requires=["RPi.GPIO",
+                      "boto3",
                       'pytz',
                       'flask',
                       'tzlocal'],
